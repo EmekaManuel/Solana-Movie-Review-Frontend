@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from "react";
 import * as web3 from "@solana/web3.js";
 import { Card } from "@/components/MovieCard";
 import { MovieCoordinator } from "@/coordinator/MovieCoordinator";
-import { Movie } from "@/models/Movie"; // Make sure this path is correct
+import { Movie } from "@/models/Movie";
 
 export const MovieList: FC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -50,7 +50,7 @@ export class Movie {
 
   serialize(): Buffer {
     try {
-      const buffer = Buffer.alloc(1000);
+      const buffer = Buffer.alloc(1000); // Adjust size if needed
       this.borshInstructionSchema.encode({ ...this, variant: 0 }, buffer);
       return buffer.subarray(0, this.borshInstructionSchema.getSpan(buffer));
     } catch (e) {
