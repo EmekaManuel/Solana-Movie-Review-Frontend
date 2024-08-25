@@ -38,16 +38,46 @@ This project is an updated Movie Review Application built on the Solana blockcha
    cd movie-review-app
    ```
 
-2. \*\*Install dependencies
+2. **Install dependencies**
+
+   Using Yarn:
+
+   ```bash
+      yarn install
+   ```
+
+   Using Npm:
+
+   ```bash
+      npm install
+   ```
+
+### Running the Application
+To start the development server, run:
 
 Using Yarn:
 
-```bash
-yarn install
-```
+   ```bash
+      yarn dev
+   ```
 
-Using Npm:
+Or with npm:
 
-```bash
-npm install
-```
+   ```bash
+      npm run dev
+   ```
+
+`Open your browser and navigate to http://localhost:3000 to view the application`.
+
+
+### Contributing
+Contributions are welcome! If you have suggestions or improvements, please create a pull request or open an issue on the GitHub repository.
+
+### License
+This project is licensed under the MIT License.
+
+### Acknowledgments
+- [Solana Developer Course](https://soldev.app/course) for the initial example code.
+- [Next.js](https://nextjs.org/) for providing a powerful React framework.
+- [Tailwind CSS](https://tailwindcss.com/) for a modern and flexible styling solution.
+
