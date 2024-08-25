@@ -1,6 +1,8 @@
 import { FC, useState } from "react";
 import * as web3 from "@solana/web3.js";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
+import { useToast } from "@/components/ui/use-toast"; // Ensure this path is correct
+
 import { Movie } from "@/models/Movie";
 
 const MOVIE_REVIEW_PROGRAM_ID = "CenYq6bDRB7p73EjsPEpiYN7uveyPUTdXkDkgUduboaN";
@@ -11,6 +13,7 @@ export const Form: FC = () => {
   const [description, setDescription] = useState("");
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
+  const { toast } = useToast();
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
@@ -20,7 +23,11 @@ export const Form: FC = () => {
 
   const handleTransactionSubmit = async (movie: Movie) => {
     if (!publicKey) {
-      alert("Please connect your wallet!");
+      toast({
+        title: "Wallet not connected",
+        description: "Please connect your wallet to submit a review.",
+        variant: "destructive",
+      });
       return;
     }
 
@@ -50,21 +57,27 @@ export const Form: FC = () => {
 
     try {
       const txid = await sendTransaction(transaction, connection);
-      alert(
-        `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
-      );
+      toast({
+        title: "Transaction Submitted",
+        description: `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`,
+        variant: "success",
+      });
       console.log(
         `Transaction submitted: https://explorer.solana.com/tx/${txid}?cluster=devnet`
       );
     } catch (e) {
-      alert(JSON.stringify(e));
+      toast({
+        title: "Transaction Failed",
+        description: JSON.stringify(e),
+        variant: "destructive",
+      });
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="py-4 px-6 max-w-[450px] flex items-center justify-center flex-col border border-gray-700 rounded-lg  bg-gray-800 text-white"
+      className="py-4 px-6 max-w-[450px] flex items-center justify-center flex-col border border-gray-700 rounded-lg bg-gray-800 text-white"
     >
       <div className="mb-4">
         <label className="block text-gray-400 mb-2" htmlFor="title">
@@ -72,7 +85,7 @@ export const Form: FC = () => {
         </label>
         <input
           id="title"
-          className=" p-2 w-[400px] bg-gray-700 border border-gray-600 rounded"
+          className="p-2 w-[400px] bg-gray-700 border border-gray-600 rounded"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
