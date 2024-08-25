@@ -50,12 +50,12 @@ export class Movie {
 
   serialize(): Buffer {
     try {
-      const buffer = Buffer.alloc(1000); // Adjust size if needed
+      const buffer = Buffer.alloc(1000);
       this.borshInstructionSchema.encode({ ...this, variant: 0 }, buffer);
-      return buffer.slice(0, this.borshInstructionSchema.getSpan(buffer));
+      return buffer.subarray(0, this.borshInstructionSchema.getSpan(buffer));
     } catch (e) {
       console.error("Serialization error:", e);
-      return Buffer.alloc(0); // Return an empty buffer or handle it according to your needs
+      return Buffer.alloc(0);
     }
   }
 
